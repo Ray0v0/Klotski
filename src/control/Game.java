@@ -1,13 +1,13 @@
 package control;
 
 import model.*;
+import view.GameFrame;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
     public GameBoard gameBoard;
     public Setting setting;
+    private GameFrame frame;
 
     public Game() {
 
@@ -27,28 +27,17 @@ public class Game {
     }
 
     public void start() throws Exception {
-        Scanner in = new Scanner(System.in);
-        while (true) {
-            assert gameBoard != null;
-            gameBoard.print();
+        frame = new GameFrame(gameBoard, this);
+    }
 
-            if (gameBoard.pieceAtPos(setting.winCondition.piece, setting.winCondition.h, setting.winCondition.w)) {
-                System.out.println("恭喜获胜！");
-                break;
+    public void step(Piece piece, Direction direction) {
+        try {
+            if (gameBoard.ableToMove(piece, direction)) {
+                gameBoard.move(piece, direction);
             }
-
-            ArrayList<PieceAndDirection> moves = gameBoard.getAllPossibleMoves();
-            System.out.println("可选择的移动方式：");
-            for (int i = 0; i < moves.size(); i++) {
-                System.out.print(i);
-                System.out.print("：");
-                System.out.println(moves.get(i));
-            }
-            System.out.print("请选择移动方式：");
-            int choice = in.nextInt();
-
-            PieceAndDirection pieceAndDirection = moves.get(choice);
-            gameBoard.move(pieceAndDirection.piece, pieceAndDirection.direction);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
+        frame.gamePanel.fresh();
     }
 }
