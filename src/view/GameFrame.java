@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
         setTitle("Klotski");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel(gameBoard, game);
-        gamePanel.fresh();
+        gamePanel.fresh(null, null, 0);
         setContentPane(gamePanel);
         pack();
         setLocationRelativeTo(null);

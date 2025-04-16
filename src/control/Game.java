@@ -26,7 +26,7 @@ public class Game {
         }
     }
 
-    public void start() throws Exception {
+    public void start() {
         frame = new GameFrame(gameBoard, this);
     }
 
@@ -34,10 +34,19 @@ public class Game {
         try {
             if (gameBoard.ableToMove(piece, direction)) {
                 gameBoard.move(piece, direction);
+                frame.gamePanel.update(piece, direction);
+                PieceAndPos winCondition = setting.winCondition;
+                if (gameBoard.pieceAtPos(winCondition.piece, winCondition.h, winCondition.w)) {
+                    end();
+                }
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        frame.gamePanel.fresh();
+    }
+
+    public void end() {
+        System.out.println("恭喜获胜！");
+        frame.dispose();
     }
 }
