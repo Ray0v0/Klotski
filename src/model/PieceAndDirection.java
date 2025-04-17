@@ -1,6 +1,8 @@
 package model;
 
-public class PieceAndDirection {
+import java.io.Serializable;
+
+public class PieceAndDirection implements Serializable {
     public Piece piece;
     public Direction direction;
 

@@ -1,5 +1,6 @@
 package control;
 
+import ai.BFSMap;
 import model.*;
 import view.GameFrame;
 
@@ -8,6 +9,7 @@ public class Game {
     public GameBoard gameBoard;
     public Setting setting;
     private GameFrame frame;
+    private BFSMap aiMap;
 
     public Game() {
 
@@ -28,6 +30,14 @@ public class Game {
 
     public void start() {
         frame = new GameFrame(gameBoard, this);
+    }
+
+    public void ai() throws Exception {
+        if (aiMap == null) {
+            aiMap = BFSMap.load("data/BFSMap/map.ser");
+        }
+        PieceAndDirection move = aiMap.query(gameBoard);
+        step(move.piece, move.direction);
     }
 
     public void step(Piece piece, Direction direction) {

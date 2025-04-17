@@ -1,6 +1,8 @@
 package model;
 
-public class PieceAndPos {
+import java.io.Serializable;
+
+public class PieceAndPos implements Serializable {
     public Piece piece;
     public int h, w;
 

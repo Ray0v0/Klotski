@@ -1,8 +1,9 @@
 package model;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Piece {
+public class Piece implements Serializable {
     public String name;
     public int height, width;
     public Color color;

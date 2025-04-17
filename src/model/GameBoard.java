@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameBoard {
+public class GameBoard implements Serializable {
     public boolean[][] occupancyMap;
     public ArrayList<PieceAndPos> piecesAndPoses = new ArrayList<>();
 
