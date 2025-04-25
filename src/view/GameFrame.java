@@ -4,6 +4,8 @@ import control.Game;
 import model.GameBoard;
 
 import javax.swing.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -15,7 +17,7 @@ public class GameFrame extends JFrame implements KeyListener {
         this.game = game;
         setTitle("Klotski");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gamePanel = new GamePanel(gameBoard, game);
+        gamePanel = new GamePanel(gameBoard, game, this);
         gamePanel.fresh(null, null, 0);
         setContentPane(gamePanel);
         pack();
@@ -44,4 +46,5 @@ public class GameFrame extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
 }
